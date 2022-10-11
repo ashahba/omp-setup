@@ -14,7 +14,9 @@
 # limitations under the License.
 #
 
-FROM intel/intel-optimized-tensorflow
+ARG IMAGE_NAME=intel/intel-optimized-tensorflow
+ARG IMAGE_TAG=latest
+FROM ${IMAGE_NAME}:${IMAGE_TAG}
 
 SHELL ["/bin/bash", "-c"]
 
