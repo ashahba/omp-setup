@@ -49,7 +49,6 @@ if __name__ == "__main__":
     parser.add_argument("-e", "--epochs", type=int, default=1, choices=range(1,11), help="Number of training epochs")
     args = parser.parse_args()
     epochs = args.epochs
-    print(args)
     if int(epochs) <= 0:
         raise argparse.ArgumentTypeError("%s is an invalid positive int value" % epochs)
 
