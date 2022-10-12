@@ -1,8 +1,12 @@
+import argparse
+
 import tensorflow as tf
 print("TensorFlow version:", tf.__version__)
 
-
 class tf_mnist:
+    def __init__(self, ephocs):
+        self.epochs = epochs
+
     def steps(self):
         mnist = tf.keras.datasets.mnist
 
@@ -29,7 +33,7 @@ class tf_mnist:
                       loss=loss_fn,
                       metrics=['accuracy'])
 
-        model.fit(x_train, y_train, epochs=2)
+        model.fit(x_train, y_train, epochs=self.epochs)
 
         model.evaluate(x_test,  y_test, verbose=2)
 
@@ -41,4 +45,12 @@ class tf_mnist:
         probability_model(x_test[:5])
 
 if __name__ == "__main__":
-    tf_mnist().steps()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-e", "--epochs", type=int, default=1, choices=range(1,11), help="Number of training epochs")
+    args = parser.parse_args()
+    epochs = args.epochs
+    print(args)
+    if int(epochs) <= 0:
+        raise argparse.ArgumentTypeError("%s is an invalid positive int value" % epochs)
+
+    tf_mnist(epochs).steps()
