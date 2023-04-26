@@ -20,6 +20,8 @@ FROM ${IMAGE_NAME}:${IMAGE_TAG}
 
 SHELL ["/bin/bash", "-c"]
 
+RUN groupadd -r intelai && useradd -r -g intelai intelai
+
 ENV OMP_NUM_THREADS=4
 ENV OMP_THREAD_LIMIT=4
 ENV TF_ENABLE_MKL_NATIVE_FORMAT=1
@@ -33,3 +35,5 @@ RUN apt-get update && \
     apt-get install --no-install-recommends --fix-missing -y numactl && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+USER intelai
